@@ -65,11 +65,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    // Activity
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-
     // Compose
     // This is written following the guide : https://developer.android.com/develop/ui/compose/setup#kotlin
     val composeBom = platform(libs.androidx.compose.bom)
