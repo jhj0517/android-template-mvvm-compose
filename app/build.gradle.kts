@@ -67,6 +67,7 @@ dependencies {
 
     // Compose
     // This is written following the guide : https://developer.android.com/develop/ui/compose/setup#kotlin
+    // Bom libraries : https://developer.android.com/develop/ui/compose/bom/bom-mapping
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -79,6 +80,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.runtime.livedata)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -99,6 +102,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(composeBom)
 
 }
 
