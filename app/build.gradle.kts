@@ -12,11 +12,11 @@ val properties = Properties()
 properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
-    namespace = "com.jhj0517.android_template_mvvm_xml"
+    namespace = "com.jhj0517.android_template_mvvm_compose"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jhj0517.android_template_mvvm_xml"
+        applicationId = "com.jhj0517.android_template_mvvm_compose"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

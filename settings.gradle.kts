@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-template-mvvm-xml"
+rootProject.name = "android-template-mvvm-compose"
 include(":app")
  
