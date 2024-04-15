@@ -47,10 +47,15 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
         buildConfig = true
     }
     dataBinding {
         enable = true
+    }
+    composeOptions {
+        // See compatible map : https://developer.android.com/jetpack/androidx/releases/compose-kotlin
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
 }
 
@@ -59,23 +64,39 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
 
+    // Activity
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
+    // Compose
+    // This is written following the guide : https://developer.android.com/develop/ui/compose/setup#kotlin
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.preview)
+    debugImplementation(libs.androidx.compose.ui.preview.debug)
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    debugImplementation(libs.androidx.compose.ui.test.debug)
+
+    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx) // To use coroutines with room
     ksp(libs.androidx.room.compiler)
 
+    // Hilt
     implementation(libs.google.dagger.hilt)
     kapt(libs.google.dagger.hilt.compiler)
 
+    // Retrofit
     implementation(libs.google.code.gson)
     implementation(libs.squareup.retrofit2)
     implementation(libs.squareup.retrofit2.converter)
     implementation(libs.squareup.okhttp.logging)
 
+    // UnitTest
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
