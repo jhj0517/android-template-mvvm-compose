@@ -1,9 +1,7 @@
-# Android MVVM (XML) Template
-DRAFT - Editing
-
-Simple template for MVVM with XML (Activity & Fragment) in Android, without Compose.
+# Android MVVM (Compose) Template
+Simple template for MVVM with in Android with Compose.
 # Architecture
-![Flowcharts](https://github.com/jhj0517/android-template-mvvm-xml/assets/97279763/c9c0de0a-9a3a-47ff-9f48-0999e39caa34)
+![Flowcharts - Page 1](https://github.com/jhj0517/android-template-mvvm-compose/assets/97279763/552d4390-31ba-4ae9-ae74-43d50dd1554a)
 # Overview
 - Notices
     1. The INTERNET permission is enabled in the Manifest because there's a basic Retrofit2 usage.
@@ -13,6 +11,7 @@ Simple template for MVVM with XML (Activity & Fragment) in Android, without Comp
 ```toml
 agp = "8.3.0"
 kotlin = "1.9.0"
+composeBom = "2024.04.00"
 room = "2.6.1"
 hilt = "2.51.1"
 gson = "2.10.1"
