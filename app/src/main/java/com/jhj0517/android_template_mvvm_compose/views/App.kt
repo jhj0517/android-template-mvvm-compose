@@ -1,14 +1,13 @@
 package com.jhj0517.android_template_mvvm_compose.views
 
 import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.jhj0517.android_template_mvvm_compose.views.home.HomeScreen
 
 @Composable
 fun App() {
