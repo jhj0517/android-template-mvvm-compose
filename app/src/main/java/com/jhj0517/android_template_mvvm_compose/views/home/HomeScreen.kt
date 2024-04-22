@@ -1,14 +1,11 @@
-package com.jhj0517.android_template_mvvm_compose.views
+package com.jhj0517.android_template_mvvm_compose.views.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -32,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jhj0517.android_template_mvvm_compose.models.localdb.ExampleData
 import com.jhj0517.android_template_mvvm_compose.ui.Theme
 import com.jhj0517.android_template_mvvm_compose.viewmodels.DataViewModel
+import com.jhj0517.android_template_mvvm_compose.views.common.NormalAppBar
 
 
 @Composable
@@ -39,31 +37,33 @@ fun HomeScreen(
     viewModel: DataViewModel = hiltViewModel(),
 ){
     var input by rememberSaveable { mutableStateOf("") }
-    val list  = viewModel.exampleDataList.observeAsState().value
+    val list  = viewModel.exampleDataList.observeAsState().value ?: listOf()
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .systemBarsPadding()
+            .systemBarsPadding(),
+        topBar = {
+            NormalAppBar(title = "HomeScreen")
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .padding(top = 20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-
             SearchBar(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                 input=input,
                 onChange = { input= it },
                 onSend = { viewModel.insertLocalData(ExampleData(name = input)) }
             )
 
-            LazyColumn(Modifier.fillMaxSize()) {
-                items(list ?: listOf()) {
-                    ListItem(it, onDelete = {viewModel.deleteLocalData(it)})
-                }
-            }
-
+            HomeListScreen(
+                list = list,
+                onDelete = { viewModel.deleteLocalData(it) }
+            )
         }
     }
 }
@@ -73,14 +73,6 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     Theme {
         HomeScreen()
-    }
-}
-
-@Composable
-fun ListItem(data: ExampleData, onDelete: () -> Unit, modifier: Modifier = Modifier) {
-    Row(modifier.fillMaxWidth()) {
-        Text(text = data.name, modifier = Modifier.weight(1f))
-        DeleteButton(onClick = onDelete)
     }
 }
 
@@ -95,8 +87,14 @@ fun DeleteButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SearchBar(input: String, onChange: (String) -> Unit, onSend: () -> Unit){
+fun SearchBar(
+    modifier: Modifier = Modifier,
+    input: String,
+    onChange: (String) -> Unit,
+    onSend: () -> Unit
+) {
     TextField(
+        modifier = modifier,
         value = input,
         onValueChange = onChange,
         placeholder = {
