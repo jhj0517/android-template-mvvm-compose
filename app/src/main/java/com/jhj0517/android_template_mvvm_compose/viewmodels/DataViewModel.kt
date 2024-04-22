@@ -18,6 +18,10 @@ class DataViewModel @Inject constructor(
     private val _exampleDataList = MutableLiveData<List<ExampleData>>()
     val exampleDataList get() = _exampleDataList
 
+    init {
+        getLocalData()
+    }
+
     fun getLocalData(){
         viewModelScope.launch(Dispatchers.IO) {
             _exampleDataList.postValue(dataDao.getAllData())
